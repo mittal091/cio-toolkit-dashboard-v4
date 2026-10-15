@@ -6,7 +6,7 @@ const ok = (n, c, d = '') => { if (c) lines.push('PASS  ' + n); else { failed++;
 const wait = ms => new Promise(r => setTimeout(r, ms));
 async function load(hash) {
   document.querySelectorAll('iframe').forEach(f => f.remove());
-  const f = document.createElement('iframe'); f.src = '/index.html' + hash; document.body.appendChild(f);
+  const f = document.createElement('iframe'); f.src = '../index.html' + hash; document.body.appendChild(f);
   await new Promise(r => f.onload = r); await wait(500);
   return f;
 }
@@ -72,7 +72,7 @@ const key = (w, el, k) => el.dispatchEvent(new w.KeyboardEvent('keydown', { key:
     // ---- layout: what a leader sees without scrolling ----
     async function loadSized(hash, w, hgt) {
       document.querySelectorAll('iframe').forEach(x => x.remove());
-      const fr = document.createElement('iframe'); fr.style.cssText = `width:${w}px;height:${hgt}px`; fr.src = '/index.html' + hash; document.body.appendChild(fr);
+      const fr = document.createElement('iframe'); fr.style.cssText = `width:${w}px;height:${hgt}px`; fr.src = '../index.html' + hash; document.body.appendChild(fr);
       await new Promise(r => fr.onload = r); await wait(600); return fr;
     }
     let fr = await loadSized('#cockpit', 1366, 768); let dd = fr.contentDocument;

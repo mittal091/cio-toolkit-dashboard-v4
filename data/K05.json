@@ -1,0 +1,12 @@
+{
+  "kpi": "K05",
+  "domain": "cost",
+  "asOf": "2026-10-12",
+  "owner": "IT Finance",
+  "source": "Finance export · FIN-2026-10",
+  "metrics": {
+    "itSpendPct": { "label": "IT spend % of revenue", "unit": "pct", "decimals": 1, "value": 3.4,
+      "prior": 3.3, "polarity": "down", "status": "neutral",
+      "note": "Total IT spend as a share of revenue. A lower share is only better if service levels hold." }
+  }
+}

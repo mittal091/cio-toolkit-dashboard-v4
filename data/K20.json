@@ -1,0 +1,26 @@
+{
+  "kpi": "K20",
+  "domain": "security",
+  "asOf": "2026-10-12",
+  "owner": "CISO",
+  "source": "Vulnerability snapshot · VUL-084",
+  "series": {
+    "criticalsOpenWeekly": {
+      "name": "Critical vulnerabilities", "unit": "count",
+      "labels": ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10", "W11", "W12"],
+      "values": [22, 21, 23, 20, 19, 21, 18, 17, 20, 19, 18, 17]
+    }
+  },
+  "metrics": {
+    "criticalOpen": { "label": "Critical vulnerabilities open", "unit": "count",
+      "value": { "derive": "last", "series": "criticalsOpenWeekly" },
+      "prior": { "derive": "at", "series": "criticalsOpenWeekly", "index": 10 },
+      "trend": { "series": "criticalsOpenWeekly" },
+      "polarity": "down", "status": "warn",
+      "note": "Critical vulnerabilities currently open. The detail by asset stays in the Security and Risk view." },
+    "patchTarget": { "label": "Patch SLA target", "unit": "pct", "decimals": 0, "value": 95, "status": "neutral" },
+    "patchedInSla": { "label": "Patched within SLA", "unit": "pct", "decimals": 0, "value": 88,
+      "prior": 90, "polarity": "up", "targetText": "Target {{K20:patchTarget}}", "status": "warn",
+      "note": "Share of critical patches applied within the SLA. AI ranks what to patch first by exploitability and asset criticality. The CISO decides." }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "kpi": "K17",
+  "domain": "service",
+  "asOf": "2026-10-12",
+  "owner": "Operations",
+  "source": "Incident ledger · INC-228",
+  "series": {
+    "incidents": {
+      "name": "Incidents", "unit": "count",
+      "labels": ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10", "W11", "W12"],
+      "values": [9, 11, 8, 10, 9, 12, 10, 11, 19, 15, 13, 14]
+    },
+    "mttr": {
+      "name": "MTTR", "unit": "hours",
+      "labels": ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10", "W11", "W12"],
+      "values": [2.6, 2.8, 2.5, 2.7, 2.4, 2.9, 2.6, 2.8, 4.6, 4.1, 3.4, 3.1]
+    }
+  },
+  "markers": [
+    { "series": "incidents", "index": 8, "text": "Release R-214" },
+    { "series": "mttr", "index": 8, "text": "Release R-214" }
+  ],
+  "metrics": {
+    "incidentsW12": { "label": "P1/P2 incidents, W12", "unit": "count",
+      "value": { "derive": "last", "series": "incidents" },
+      "prior": { "derive": "at", "series": "incidents", "index": 10 },
+      "trend": { "series": "incidents" },
+      "polarity": "down", "status": "warn",
+      "note": "P1 and P2 incidents in the latest week. Week 9 peaked at {{K17:incidents:at(8)}} after release R-214 and the count is still above the pre-release level." },
+    "mttrW12": { "label": "MTTR, W12", "unit": "hours",
+      "value": { "derive": "last", "series": "mttr" },
+      "prior": { "derive": "at", "series": "mttr", "index": 10 },
+      "trend": { "series": "mttr" },
+      "polarity": "down", "status": "good",
+      "note": "Mean time to restore service after a P1 or P2 incident. It peaked at {{K17:mttr:at(8)}} in week 9 and has been falling since." },
+    "clusters": { "label": "Repeat-incident clusters", "unit": "count",
+      "value": { "derive": "rowCount", "dataset": "repeat-incidents" },
+      "prior": 2, "polarity": "down", "status": "neutral",
+      "note": "Groups of similar tickets that keep coming back. AI groups the tickets by text and suggests a link. The problem manager confirms it." }
+  }
+}

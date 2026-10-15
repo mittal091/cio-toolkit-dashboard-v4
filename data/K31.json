@@ -1,0 +1,22 @@
+{
+  "kpi": "K31",
+  "domain": "ai",
+  "asOf": "2026-10-12",
+  "owner": "Data and AI lead",
+  "source": "AI intake register · AI-011",
+  "values": {
+    "stages": { "ideas": 24, "pilots": 11, "live": 6 }
+  },
+  "metrics": {
+    "useCases": { "label": "AI use cases", "unit": "count",
+      "value": { "derive": "sumCounts", "values": "stages" },
+      "prior": 38, "polarity": "up", "status": "neutral",
+      "note": "AI use cases from idea to production: {{K31:ideas}} ideas, {{K31:pilots}} pilots and {{K31:live}} live." },
+    "ideas": { "label": "Ideas", "unit": "count",
+      "value": { "derive": "pick", "values": "stages", "key": "ideas" }, "status": "neutral" },
+    "pilots": { "label": "Pilots", "unit": "count",
+      "value": { "derive": "pick", "values": "stages", "key": "pilots" }, "status": "neutral" },
+    "live": { "label": "Live", "unit": "count",
+      "value": { "derive": "pick", "values": "stages", "key": "live" }, "status": "neutral" }
+  }
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CIO Toolkit Role Views</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="eyebrow">CIO Toolkit</div>
+    <div class="rolebar">
+      <label for="role">Viewing as</label><select id="role"></select>
+    </div>
+  </div>
+  <h1>CIO Dashboard: one cockpit, role-based views</h1>
+  <p class="lede">Select any tile for its evidence, or ask a question for a sourced answer.</p>
+  <ol class="road" aria-label="Programme roadmap">
+    <li class="on" aria-current="step">1 Inform <small>MVP demo</small></li>
+    <li>2 Explain <small>Next phase</small></li>
+    <li>3 Act <small>Preview</small></li>
+  </ol>
+
+  <div class="tabs" id="tabs" role="tablist" aria-label="Views"></div>
+  <div class="meta" id="meta"></div>
+  <div id="view" role="tabpanel"></div>
+
+  <div class="foot">Illustrative data shown throughout for demonstration purposes.</div>
+</div>
+<dialog id="detail" aria-labelledby="detail-title"><div id="detail-body"></div><button type="button" class="primary" id="close">Close</button></dialog>
+<div id="toast" role="status"></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

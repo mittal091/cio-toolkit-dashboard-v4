@@ -1,0 +1,20 @@
+{
+  "kpi": "K24",
+  "domain": "security",
+  "asOf": "2026-10-12",
+  "owner": "Risk and Compliance",
+  "source": "Audit register · AUD-026",
+  "values": {
+    "severity": { "high": 2, "medium": 3 }
+  },
+  "metrics": {
+    "overdue": { "label": "Audit findings overdue", "unit": "count",
+      "value": { "derive": "sumCounts", "values": "severity" },
+      "prior": 7, "polarity": "down", "status": "bad",
+      "note": "Audit findings past their due date: {{K24:high}} high and {{K24:medium}} medium. Themes are access reviews and backup testing." },
+    "high": { "label": "Overdue, high", "unit": "count",
+      "value": { "derive": "pick", "values": "severity", "key": "high" }, "status": "neutral" },
+    "medium": { "label": "Overdue, medium", "unit": "count",
+      "value": { "derive": "pick", "values": "severity", "key": "medium" }, "status": "neutral" }
+  }
+}

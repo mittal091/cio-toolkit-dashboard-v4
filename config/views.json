@@ -1,0 +1,190 @@
+[
+  {
+    "id": "cockpit", "name": "CIO cockpit", "roles": ["cio"],
+    "accessText": "CIO office, summary of all views",
+    "blocks": [
+      { "type": "briefing", "eyebrow": "WEEK 12 EXECUTIVE BRIEFING · DEMO",
+        "headline": "Release R-214 hit four areas. Payments needs action this week.",
+        "text": "MTTR is back to {{K17:mttr:last}} from {{K17:mttr:at(8)}}, but cloud cost is still {{K07:vsW8}} above week 8, the Payments gateway patch SLA is breached, and {{K14:flagged}} projects are Green on paper but at risk.",
+        "stat": { "value": "{{ds:attention:open}}", "label": "Decisions open", "note": "{{ds:attention:openCritical}} critical, {{ds:attention:openSoon}} due soon" } },
+      { "type": "tiles", "items": [
+        { "kpi": "K05", "metric": "itSpendPct" },
+        { "kpi": "K06", "metric": "budgetYtd" },
+        { "kpi": "K16", "metric": "servicesMeetingSla", "sub": "Payments below target", "status": "bad" },
+        { "kpi": "K17", "metric": "incidentsW12", "sub": "MTTR {{K17:mttr:last}}, was {{K17:mttr:at(8)}} in W9" }
+      ] },
+      { "type": "table", "dataset": "attention",
+        "columns": ["item", "owner", "step", "due", "status"],
+        "title": "Needs your attention this week",
+        "subtitle": "Five items, each with an owner and a first step. Select an item for the decision.",
+        "footer": [{ "kind": "go", "view": "actions", "text": "Open the decision log" }] },
+      { "type": "services", "dataset": "availability",
+        "title": "Critical services",
+        "subtitle": "Availability over 12 weeks against the {{K16:target}} target",
+        "options": { "unit": "pct", "decimals": 2 } },
+      { "type": "table", "dataset": "one-event",
+        "title": "One event, seen by each role",
+        "subtitle": "Release R-214 in week 9. Click a role to open its view." },
+      { "type": "ask" }
+    ]
+  },
+  {
+    "id": "fin", "name": "Finance and FinOps", "roles": ["finance", "cio"],
+    "accessText": "Finance, FinOps, Procurement, CIO office",
+    "blocks": [
+      { "type": "briefing", "eyebrow": "FINANCE AND FINOPS · WEEK 12",
+        "headline": "Cloud cost spiked after R-214 and has only partly recovered.",
+        "text": "Week 9 added {{K07:spikeAmt}} ({{K07:spikeW9}}). Cloud cost is still {{K07:vsW8}} above week 8, and the Observability and ERP contract notices fall due before year end." },
+      { "type": "tiles", "items": [
+        { "kpi": "K07", "metric": "spend12w" },
+        { "kpi": "K07", "metric": "wasteShare", "sub": "waste share" },
+        { "kpi": "K06", "metric": "budgetYtd", "label": "Budget vs actual, YTD", "sub": "{{K06:monthlyActual:sum}} vs {{K06:monthlyBudget:sum}}" },
+        { "kpi": "K09", "metric": "renewals" }
+      ] },
+      { "type": "row", "columns": 2, "blocks": [
+        { "type": "chart", "kind": "line", "kpi": "K07", "series": "weekly",
+          "title": "Weekly cloud spend ($k)", "subtitle": "K07 · daily data, weekly view",
+          "options": { "min": 150, "max": 300, "step": 50, "area": true, "marker": true, "color": "cyan", "aria": "Weekly cloud spend" } },
+        { "type": "table", "dataset": "cloud-drivers",
+          "title": "What the AI found",
+          "subtitle": "Week 9: {{K07:weekly:at(7)}} to {{K07:weekly:at(8)}}, +{{K07:spikeAmt}}",
+          "footnote": "Sources: billing export W9, change record CHG-3391. Ask the question below to see them." }
+      ] },
+      { "type": "table", "dataset": "renewals",
+        "title": "Contract renewals",
+        "subtitle": "K09 · AI reads the contract PDFs. Legal reviews before any action." },
+      { "type": "ask" }
+    ]
+  },
+  {
+    "id": "ops", "name": "Operations", "roles": ["ops", "cio"],
+    "accessText": "Operations, service owners, CIO office",
+    "blocks": [
+      { "type": "briefing", "eyebrow": "OPERATIONS · WEEK 12",
+        "headline": "Recovery is under way after R-214, but Payments is still below target.",
+        "text": "MTTR is {{K17:mttr:last}}, down from {{K17:mttr:at(8)}} in week 9. Payments availability is {{K16:paymentsAvailability}}, below the {{K16:target}} target." },
+      { "type": "tiles", "items": [
+        { "kpi": "K16", "metric": "servicesMeetingSla" },
+        { "kpi": "K17", "metric": "incidentsW12", "sub": "W9 peak was {{K17:incidents:at(8)}}" },
+        { "kpi": "K17", "metric": "mttrW12", "sub": "was {{K17:mttr:at(8)}} in W9" },
+        { "kpi": "K17", "metric": "clusters" }
+      ] },
+      { "type": "row", "columns": 2, "blocks": [
+        { "type": "chart", "kind": "bar", "kpi": "K17", "series": "incidents",
+          "title": "P1/P2 incidents per week", "subtitle": "K17",
+          "options": { "min": 0, "max": 20, "step": 5, "color": "blue", "highlight": "markers", "highlightColor": "red", "aria": "Incidents per week" } },
+        { "type": "chart", "kind": "hbar", "dataset": "availability",
+          "title": "Availability by critical service",
+          "subtitle": "K16 · amber line is the {{K16:target}} target",
+          "options": { "max": 100, "base": 99.8, "unit": "pct", "decimals": 2, "target": { "kpi": "K16", "metric": "target" } } }
+      ] },
+      { "type": "table", "dataset": "repeat-incidents",
+        "title": "Repeat incidents",
+        "subtitle": "K17 · AI groups tickets by text and suggests a link. The problem manager confirms it." },
+      { "type": "ask" }
+    ]
+  },
+  {
+    "id": "del", "name": "Delivery and Engineering", "roles": ["delivery", "cio"],
+    "accessText": "PMO, Engineering leads, CIO office",
+    "blocks": [
+      { "type": "briefing", "eyebrow": "DELIVERY AND ENGINEERING · WEEK 12",
+        "headline": "Two projects report Green but show risk signals.",
+        "text": "{{K14:flagged}} of {{K14:total}} projects need a PM check. {{K11:deploysLastWeek}} deployments went out last week." },
+      { "type": "tiles", "items": [
+        { "kpi": "K03", "metric": "onTime" },
+        { "kpi": "K14", "metric": "ragCounts", "sub": "{{K14:total}} projects" },
+        { "kpi": "K14", "metric": "flagged", "label": "AI-flagged \"green but at risk\"", "sub": "PM to confirm" },
+        { "kpi": "K11", "metric": "deploysLastWeek", "sub": "direct metric" }
+      ] },
+      { "type": "table", "dataset": "project-health",
+        "title": "Green data, red narrative",
+        "subtitle": "K14 · AI compares what the status reports say with the reported colour" },
+      { "type": "ask" }
+    ]
+  },
+  {
+    "id": "sec", "name": "Security and Risk", "roles": ["security", "cio"],
+    "accessText": "Restricted: CISO, Risk and Compliance, CIO office",
+    "blocks": [
+      { "type": "note", "tone": "warn", "text": "Restricted view. The Ask panel answers only with the access of the person asking." },
+      { "type": "briefing", "eyebrow": "SECURITY AND RISK · WEEK 12",
+        "headline": "The Payments gateway patch SLA is breached.",
+        "text": "{{K20:criticalOpen}} critical vulnerabilities are open and {{K20:patchedInSla}} were patched within SLA, against a {{K20:patchTarget}} target. {{K24:overdue}} audit findings are overdue." },
+      { "type": "tiles", "items": [
+        { "kpi": "K20", "metric": "criticalOpen" },
+        { "kpi": "K20", "metric": "patchedInSla" },
+        { "kpi": "K21", "metric": "mfa" },
+        { "kpi": "K24", "metric": "overdue", "sub": "{{K24:high}} high, {{K24:medium}} medium" }
+      ] },
+      { "type": "table", "dataset": "patch-priority",
+        "title": "Patch priority",
+        "subtitle": "K20 · AI ranks by exploitability and asset criticality. The CISO decides." },
+      { "type": "ask" }
+    ]
+  },
+  {
+    "id": "ai", "name": "AI and Data", "roles": ["ai", "finance", "cio"],
+    "accessText": "AI and Data lead, FinOps, CIO office",
+    "blocks": [
+      { "type": "briefing", "eyebrow": "AI AND DATA · WEEK 12",
+        "headline": "AI spend is rising and most live use cases lack a measured benefit.",
+        "text": "LLM spend reached {{K35:llmSpendWeekly:last}} last week, the highest in 12 weeks. Only {{K32:measuredBenefit}} live use cases have a measured benefit." },
+      { "type": "tiles", "items": [
+        { "kpi": "K31", "metric": "useCases", "sub": "{{K31:ideas}} ideas, {{K31:pilots}} pilots, {{K31:live}} live" },
+        { "kpi": "K32", "metric": "activeUsers", "sub": "{{K32:growth}} in 4 weeks" },
+        { "kpi": "K32", "metric": "measuredBenefit", "sub": "live use cases" },
+        { "kpi": "K35", "metric": "llmSpendWeek" }
+      ] },
+      { "type": "row", "columns": 2, "blocks": [
+        { "type": "chart", "kind": "line", "kpi": "K35", "series": "llmSpendWeekly",
+          "title": "Weekly AI / LLM spend ($k)", "subtitle": "K35 · anomaly and forecast",
+          "options": { "min": 10, "max": 50, "step": 10, "area": true, "color": "purple", "aria": "Weekly LLM spend" } },
+        { "type": "table", "dataset": "ai-notes",
+          "title": "What to know", "subtitle": "Usage-based pricing is volatile" }
+      ] },
+      { "type": "ask" }
+    ]
+  },
+  {
+    "id": "actions", "name": "Decision log", "group": "Act", "roles": ["cio"],
+    "accessText": "CIO office",
+    "blocks": [
+      { "type": "note", "tone": "info", "text": "Track the five executive priorities. Status changes are saved in this browser for the demo." },
+      { "type": "table", "dataset": "attention",
+        "columns": ["item", "owner", "outcome", "due", "statusEdit"],
+        "title": "Executive action tracker",
+        "subtitle": "Each action has an owner, a due date and an intended outcome. Select an item for the decision.",
+        "footer": [{ "kind": "button", "id": "reset-actions", "text": "Reset demo" }] }
+    ]
+  },
+  {
+    "id": "pack", "name": "Board pack", "group": "Act", "roles": ["cio"],
+    "accessText": "CIO office",
+    "blocks": [
+      { "type": "doc", "title": "CIO Toolkit executive briefing", "sub": "Week 12 · Draft for review",
+        "note": "Demonstration pack. Every number and source in this draft is illustrative. No live enterprise data or AI service is connected.",
+        "sections": [
+          { "heading": "Executive assessment",
+            "paragraphs": [
+              "Release R-214 in week 9 affected operations, cost, delivery and security. MTTR peaked at {{K17:mttr:at(8)}} and is back to {{K17:mttr:last}}. Cloud cost rose {{K07:spikeW9}} ({{K07:spikeAmt}}) in week 9 and is still {{K07:vsW8}} above week 8.",
+              "Year-to-date spend is {{K06:budgetYtd}} against budget ({{K06:monthlyActual:sum}} against {{K06:monthlyBudget:sum}})."
+            ] },
+          { "heading": "Decisions requested", "decisions": { "dataset": "attention", "limit": 3 } },
+          { "heading": "Operations and service",
+            "paragraphs": ["Payments availability is {{K16:paymentsAvailability}} against a {{K16:target}} target, and {{K16:servicesMeetingSla}} critical services meet it. P1 and P2 incidents in week 12: {{K17:incidents:last}}."] },
+          { "heading": "Value and financial discipline",
+            "paragraphs": ["Renewals due in the next 6 to 12 months: {{K09:renewals}}. The Observability platform (notice by 15 Nov 2026) and ERP licences (notice by 20 Dec 2026) both carry price uplifts of 7% or more. Cloud waste is {{K07:wasteShare}} of spend and needs FinOps validation before action."] },
+          { "heading": "Security and delivery",
+            "paragraphs": [
+              "{{K20:criticalOpen}} critical vulnerabilities are open and {{K20:patchedInSla}} were patched within SLA against a {{K20:patchTarget}} target. {{K24:overdue}} audit findings are overdue ({{K24:high}} high, {{K24:medium}} medium).",
+              "{{K14:flagged}} of {{K14:total}} projects are reported Green but show risk signals."
+            ] },
+          { "heading": "AI",
+            "paragraphs": ["LLM spend reached {{K35:llmSpendWeekly:last}} last week. {{K32:measuredBenefit}} live use cases have a measured benefit."] },
+          { "heading": "Trust and open issues",
+            "paragraphs": ["All figures are illustrative and have not come from connected sources. Forecasts are indicative. Approval: pending CIO and Finance review."] }
+        ] }
+    ]
+  }
+]

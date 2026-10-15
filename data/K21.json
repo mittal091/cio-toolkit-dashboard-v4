@@ -1,0 +1,12 @@
+{
+  "kpi": "K21",
+  "domain": "security",
+  "asOf": "2026-10-12",
+  "owner": "CISO",
+  "source": "Identity platform report · IAM-017",
+  "metrics": {
+    "mfa": { "label": "MFA and privileged coverage", "unit": "pct", "decimals": 0, "value": 96,
+      "prior": 95, "polarity": "up", "status": "neutral",
+      "note": "Share of accounts, including privileged accounts, protected by multi-factor authentication." }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "kpi": "K35",
+  "domain": "ai",
+  "asOf": "2026-10-12",
+  "owner": "FinOps",
+  "source": "Vendor billing portals · BILL-AI",
+  "series": {
+    "llmSpendWeekly": {
+      "name": "LLM spend", "unit": "usd_k",
+      "labels": ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10", "W11", "W12"],
+      "values": [21, 23, 24, 27, 29, 31, 33, 36, 38, 41, 44, 48]
+    }
+  },
+  "metrics": {
+    "llmSpendWeek": { "label": "AI / LLM spend, last week", "unit": "usd_k",
+      "value": { "derive": "last", "series": "llmSpendWeekly" },
+      "prior": { "derive": "at", "series": "llmSpendWeekly", "index": 10 },
+      "trend": { "series": "llmSpendWeekly" },
+      "polarity": "down", "status": "warn",
+      "note": "Weekly spend on AI and LLM services. Usage-based pricing is volatile, and FinOps owns the forecast." }
+  }
+}

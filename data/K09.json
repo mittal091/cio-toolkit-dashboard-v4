@@ -1,0 +1,12 @@
+{
+  "kpi": "K09",
+  "domain": "cost",
+  "asOf": "2026-10-12",
+  "owner": "Procurement",
+  "source": "Contract register · CTR-024",
+  "metrics": {
+    "renewals": { "label": "Renewals due (6-12 months)", "unit": "text", "value": "23 · $18.4M",
+      "prior": "21 · $16.9M", "status": "neutral",
+      "note": "Contracts due for renewal in the next 6 to 12 months and their combined annual value. AI reads the contract PDFs and Legal reviews before any action." }
+  }
+}
